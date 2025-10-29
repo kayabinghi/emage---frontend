@@ -62,7 +62,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header onSwitchToLogin={() => setView('login')} />
       <HeroSection />
       <WhyChooseUs />
       <DiscoverSection />
