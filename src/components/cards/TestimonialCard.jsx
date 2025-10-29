@@ -1,4 +1,5 @@
 import React from 'react';
+import Avatar from 'boring-avatars';
 
 const TestimonialCard = ({ quote, author, featured = false }) => {
   return (
@@ -9,7 +10,16 @@ const TestimonialCard = ({ quote, author, featured = false }) => {
         </svg>
       </div>
       <p className={`text-lg mb-6 ${featured ? 'text-white' : 'text-gray-700'}`}>{quote}</p>
-      <p className={`font-semibold ${featured ? 'text-emerald-100' : 'text-gray-900'}`}>- {author}</p>
+
+      <div className="flex items-center gap-4 mt-4">
+        <Avatar
+          size={48}
+          name={author}
+          variant="beam"
+          colors={featured ? ['#bbf7d0', '#86efac', '#16a34a', '#059669', '#064e3b'] : ['#d1fae5', '#86efac', '#34d399', '#10b981', '#065f46']}
+        />
+        <p className={`font-semibold ${featured ? 'text-emerald-100' : 'text-gray-900'}`}>- {author}</p>
+      </div>
     </div>
   );
 };
