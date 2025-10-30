@@ -7,7 +7,7 @@ import AdminDashboard from './AdminDashboard'
 import PatientDashboard from './PatientDashboard'
 import TherapistDashboard from './TherapistDashboard'
 
-export default function Dashboard({ user, token, onLogout }) {
+export default function Dashboard({ user, onLogout }) {
   const [activeTab, setActiveTab] = useState('overview')
   const [moodEntries, setMoodEntries] = useState([])
   const [journalEntries, setJournalEntries] = useState([])

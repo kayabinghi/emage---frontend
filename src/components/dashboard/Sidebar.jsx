@@ -7,7 +7,7 @@ export default function Sidebar({ activeTab, setActiveTab, userRole, mobileOpen,
   const getNavItems = () => {
     if (userRole === 'admin') return [ { id: 'overview', icon: Home, label: 'Dashboard' }, { id: 'therapists', icon: Users, label: 'Manage Therapists' }, { id: 'users', icon: Users, label: 'Manage Users' } ]
     if (userRole === 'therapist') return [ { id: 'overview', icon: Home, label: 'Dashboard' }, { id: 'patients', icon: Users, label: 'My Patients' }, { id: 'consultations', icon: Calendar, label: 'Consultations' }, { id: 'messages', icon: MessageSquare, label: 'Messages', badge: 5 } ]
-    return [ { id: 'overview', icon: Home, label: 'Overview' }, { id: 'mood', icon: Heart, label: 'Mood Tracking' }, { id: 'journal', icon: Home, label: 'Journal' }, { id: 'community', icon: MessageSquare, label: 'Community', badge: 3 }, { id: 'therapists', icon: Users, label: 'Find Therapist' } ]
+    return [ { id: 'overview', icon: Home, label: 'Overview' }, { id: 'mood', icon: Heart, label: 'Mood Tracking' }, { id: 'journal', icon: Home, label: 'Journal' }, { id: 'community', icon: MessageSquare, label: 'Community' }, { id: 'therapists', icon: Users, label: 'Find Therapist' } ]
   }
 
   const navItems = getNavItems()

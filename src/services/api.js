@@ -53,7 +53,10 @@ export async function registerUser(userData) {
     delete payload.name
   }
   Object.keys(payload).forEach((k) => { if (payload[k] === '') delete payload[k] })
-  try { console.debug('Register POST payload:', payload) } catch (e) {}
+  try { console.debug('Register POST payload:', payload) } catch (e) {
+    // ignore
+    console.error(e)
+  }
   return axios.post(`${API_URL_AUTH}/register`, payload)
 }
 export const logoutUser = () => axios.post(`${API_URL_AUTH}/logout`)

@@ -17,7 +17,7 @@ import LoginPage from './components/dashboard/LoginPage'
 import SignupPage from './components/dashboard/SignupPage'
 import Dashboard from './components/dashboard/Dashboard'
 import PendingApproval from './components/dashboard/PendingApproval'
-import { clearAuth } from './services/api'
+import { clearAuth, getStoredAuth } from './services/api'
 
 
 export default function App() {
@@ -54,16 +54,16 @@ function AppContent() {
     navigate('/login')
   }
 
-  // Rehydrate auth from storage on mount (optional)
-  // useEffect(() => {
-  //   const { token: storedToken, user: storedUser } = getStoredAuth()
-  //   if (storedUser) {
-  //     setUser(storedUser)
-  //     setToken(storedToken)
-  //     if (storedUser.role === 'therapist' && storedUser.status === 'pending') navigate('/pending')
-  //     else navigate('/dashboard')
-  //   }
-  // }, [])
+  // Rehydrate auth from storage on mount so a logged-in user stays logged in across reloads
+  useEffect(() => {
+    const { token: storedToken, user: storedUser } = getStoredAuth()
+    if (storedUser) {
+      setUser(storedUser)
+      setToken(storedToken)
+      if (storedUser.role === 'therapist' && storedUser.status === 'pending') navigate('/pending')
+      else navigate('/dashboard')
+    }
+  }, [navigate])
 
   return (
     <Routes>

@@ -6,7 +6,7 @@ import MoodModal from './MoodModal'
 import JournalModal from './JournalModal' // Import the JournalModal
 import { getMood, getStoredAuth, getJournals, addJournal } from '../../services/api' // Import journal APIs
 
-export default function PatientDashboard({ activeTab, onOpenJournal }) {
+export default function PatientDashboard({ activeTab }) {
   const [moodEntries, setMoodEntries] = useState([])
   const [journalEntries, setJournalEntries] = useState([])
   const [showMoodModal, setShowMoodModal] = useState(false)
@@ -26,7 +26,6 @@ export default function PatientDashboard({ activeTab, onOpenJournal }) {
       setLoading(false)
     }
   }, [])
-
   const loadMoodData = async (userId) => {
     try {
       setLoading(true)
