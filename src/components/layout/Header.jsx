@@ -53,7 +53,7 @@ const Header = ({ onSwitchToLogin }) => {
         </div>
         
         <button
-          onClick={(e) => scrollToId(e, 'contact')}
+          onClick={(e) => { if (onSwitchToLogin) onSwitchToLogin(); else scrollToId(e, 'contact') }}
           className="hidden md:inline-block bg-[#FF7A59] hover:bg-emerald-600 text-white px-6 py-2 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none"
           aria-label="Get started"
         >

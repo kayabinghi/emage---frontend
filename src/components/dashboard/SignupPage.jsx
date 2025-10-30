@@ -3,14 +3,14 @@ import { Heart } from 'lucide-react'
 import { registerUser, persistAuth } from '../../services/api'
 
 export default function SignupPage({ onSignup, onSwitchToLogin }) {
-  const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'patient', specialty: '' })
+  const [formData, setFormData] = useState({ name: '', email: '', phone_number: '', password: '', role: 'patient', specialty: '' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
   const handleSignup = async (e) => {
     if (e && e.preventDefault) e.preventDefault()
     setError('')
-    if (!formData.name || !formData.email || !formData.password) {
+    if (!formData.name || !formData.email || !formData.password || !formData.phone_number) {
       setError('Please fill in all fields')
       return
     }
@@ -72,6 +72,11 @@ export default function SignupPage({ onSignup, onSwitchToLogin }) {
             <div>
               <label className="block text-sm text-gray-600 mb-2">Email</label>
               <input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full px-4 py-3 border border-gray-300 rounded-lg" />
+            </div>
+
+            <div>
+              <label className="block text-sm text-gray-600 mb-2">Phone Number</label>
+              <input type="tel" value={formData.phone_number} onChange={(e) => setFormData({...formData, phone_number: e.target.value})} placeholder="e.g. +254700000000" className="w-full px-4 py-3 border border-gray-300 rounded-lg" />
             </div>
 
             <div>

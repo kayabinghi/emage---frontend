@@ -3,7 +3,7 @@ import React from 'react';
 import StatCard from '../cards/StatCard';
 import MentalBro from '../../assets/Mental health-bro.svg';
 
-const HeroSection = () => {
+const HeroSection = ({ onSwitchToLogin }) => {
   return (
     <section id="home" className="bg-gray-50 py-20 px-6">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -19,12 +19,13 @@ const HeroSection = () => {
             Expert guidance and support for your mental well-being journey. Our experienced consultants are here to help you achieve emotional balance and personal growth.
           </p>
 
-            <button
-                // onClick={(e) => scrollToId(e, 'contact')}
-                className="bg-[#FF7A59] hover:bg-emerald-600 text-white px-6 py-2 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none"
-                aria-label="Get started"
-            >
-                Book Now            </button>
+      <button
+        onClick={() => { if (onSwitchToLogin) onSwitchToLogin(); else window.location.hash = 'contact' }}
+        className="bg-[#FF7A59] hover:bg-emerald-600 text-white px-6 py-2 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none"
+        aria-label="Get started"
+      >
+        Book Now
+      </button>
         </div>
         
         <div className="relative">

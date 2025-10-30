@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HeroSection from './components/sections/HeroSection';
@@ -15,67 +16,81 @@ import ContactSection from './components/sections/ContactSection';
 import LoginPage from './components/dashboard/LoginPage'
 import SignupPage from './components/dashboard/SignupPage'
 import Dashboard from './components/dashboard/Dashboard'
+import PendingApproval from './components/dashboard/PendingApproval'
+import { clearAuth } from './services/api'
 
 
 export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  )
+}
 
-  const [view, setView] = useState('login')
+function AppContent() {
+  const navigate = useNavigate()
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(null)
 
   const handleLogin = (userData, token) => {
     setUser(userData)
     setToken(token)
-    if (userData.role === 'therapist' && userData.status === 'pending') setView('pending')
-    else setView('dashboard')
+    if (userData.role === 'therapist' && userData.status === 'pending') navigate('/pending')
+    else navigate('/dashboard')
   }
 
   const handleSignup = (userData, token) => {
     setUser(userData)
     setToken(token)
-    if (userData.role === 'therapist') setView('pending')
-    else setView('dashboard')
+    if (userData.role === 'therapist') navigate('/pending')
+    else navigate('/dashboard')
   }
 
   const handleLogout = () => {
     clearAuth()
     setUser(null)
     setToken(null)
-    setView('login')
+    navigate('/login')
   }
 
-  // Rehydrate auth from storage on mount
+  // Rehydrate auth from storage on mount (optional)
   // useEffect(() => {
   //   const { token: storedToken, user: storedUser } = getStoredAuth()
   //   if (storedUser) {
   //     setUser(storedUser)
   //     setToken(storedToken)
-  //     if (storedUser.role === 'therapist' && storedUser.status === 'pending') setView('pending')
-  //     else setView('dashboard')
+  //     if (storedUser.role === 'therapist' && storedUser.status === 'pending') navigate('/pending')
+  //     else navigate('/dashboard')
   //   }
   // }, [])
 
-  if (view === 'login') return <LoginPage onLogin={handleLogin} onSwitchToSignup={() => setView('signup')} />
-  if (view === 'signup') return <SignupPage onSignup={handleSignup} onSwitchToLogin={() => setView('login')} />
-  if (view === 'pending') return <PendingApproval onBackToLogin={() => setView('login')} />
-  if (view === 'dashboard' && user) return <Dashboard user={user} token={token} onLogout={handleLogout} />
-
   return (
-    <div className="min-h-screen bg-white">
-      <Header onSwitchToLogin={() => setView('login')} />
-      <HeroSection />
-      <WhyChooseUs />
-      <DiscoverSection />
-      <ServicesSection />
-      <CaringSection />
-      <SelfCareQuote />
-      <TestimonialsSection />
-      <PricingSection />
-      <FAQSection />
-      <NewsletterSection />
-      <ContactSection />
-      <Footer />
-    </div>
-  );
+    <Routes>
+      <Route path="/" element={(
+        <div className="min-h-screen bg-white">
+          <Header onSwitchToLogin={() => navigate('/login')} />
+          <HeroSection onSwitchToLogin={() => navigate('/login')} />
+          <WhyChooseUs />
+          <DiscoverSection />
+          <ServicesSection />
+          <CaringSection />
+          <SelfCareQuote />
+          <TestimonialsSection />
+          <PricingSection />
+          <FAQSection />
+          <NewsletterSection />
+          <ContactSection />
+          <Footer />
+        </div>
+      )} />
+
+      <Route path="/login" element={<LoginPage onLogin={handleLogin} onSwitchToSignup={() => navigate('/signup')} />} />
+      <Route path="/signup" element={<SignupPage onSignup={handleSignup} onSwitchToLogin={() => navigate('/login')} />} />
+      <Route path="/pending" element={<PendingApproval onBackToLogin={() => navigate('/login')} />} />
+      <Route path="/dashboard" element={user ? <Dashboard user={user} token={token} onLogout={handleLogout} /> : <Navigate to="/login" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  )
 }
 
