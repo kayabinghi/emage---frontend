@@ -73,9 +73,10 @@ export default function CommunityPage() {
   const handleCloseDetail = () => setSelectedCommunity(null)
 
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">Community</h1>
-      <p className="text-gray-600 mb-6">Browse groups and find supportive communities. Join to participate and receive updates.</p>
+    <div className="px-4 py-6 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Community</h1>
+        <p className="text-gray-600 mb-6 max-w-2xl">Browse groups and find supportive communities. Join to participate and receive updates.</p>
 
       {loading ? (
         <div className="text-center py-8"><p className="text-gray-500">Loading communities...</p></div>
@@ -84,7 +85,7 @@ export default function CommunityPage() {
       ) : communities.length === 0 ? (
         <div className="text-center py-8"><p className="text-gray-500">No communities found.</p></div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10">
           {communities.map((c) => (
             <CommunityCard key={c.id} community={c} onToggleJoin={toggleJoin} onView={handleView} />
           ))}
@@ -93,6 +94,7 @@ export default function CommunityPage() {
       {selectedCommunity && (
         <CommunityDetail community={selectedCommunity} onClose={handleCloseDetail} onToggleJoin={toggleJoin} />
       )}
+      </div>
     </div>
   )
 }
