@@ -62,8 +62,11 @@ export const resetPassword = (payload) => axios.post(`${API_URL_AUTH}/reset-pass
 
 
 // MOOD API
-export async function addMood(userId, emotionalLabel) {
-  return axios.post(`${API_URL_MOOD}/add`, { userId, emotionalLabel })
+export async function addMood(userId, emotionLabel) {
+  return axios.post(`${API_URL_MOOD}/add-mood`, { 
+    user_id: userId, 
+    emotion_label: emotionLabel 
+  })
 }
 
 export async function getMood(userId) {
@@ -76,7 +79,7 @@ export async function getJournals(userId) {
 }
 
 export async function addJournal(userId, journal) {
-  return axios.post(`${API_URL_JOURNALS}/${userId}/add`, journal)
+  return axios.post(`${API_URL_JOURNALS}/${userId}/add_journals`, journal)
 }
 
 export async function deleteJournal(id) {
