@@ -39,7 +39,7 @@ export default function LoginPage({ onLogin, onSwitchToSignup }) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row" style={{backgroundColor: '#A8C686'}}>
+    <div className="min-h-screen flex flex-col md:flex-row" style={{backgroundImage: '#A8C686'}}>
       <div className="w-full md:w-1/2 bg-white flex items-center justify-center p-6 sm:p-12">
         <div className="w-full max-w-md">
           <div className="mb-8">

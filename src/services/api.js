@@ -74,20 +74,20 @@ export async function getMood(userId) {
 }
 
 // JOURNALS API
-export async function getJournals(userId) {
-  return axios.get(`${API_URL_JOURNALS}/${userId}`)
+export async function getJournals() {
+  return axios.get(`${API_URL_JOURNALS}/`)
 }
 
-export async function addJournal(userId, journal) {
-  return axios.post(`${API_URL_JOURNALS}/${userId}/add_journals`, journal)
+export async function addJournal(journal) {
+  return axios.post(`${API_URL_JOURNALS}/add_journal`, journal)
 }
 
 export async function deleteJournal(id) {
-  return axios.delete(`${API_URL_JOURNALS}/${id}`)
+  return axios.delete(`${API_URL_JOURNALS}/delete/${id}`)
 }
 
 export async function updateJournal(id, journal) {
-  return axios.put(`${API_URL_JOURNALS}/${id}`, journal)
+  return axios.put(`${API_URL_JOURNALS}/update/${id}`, journal)
 }
 
 // COMMUNITY API
