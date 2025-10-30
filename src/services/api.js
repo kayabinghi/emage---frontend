@@ -103,11 +103,28 @@ export async function createCommunity(payload) {
 }
 
 export async function joinCommunity(communityId, userId) {
-  return axios.post(`${API_URL_COMMUNITY}/${communityId}/join`, { userId })
+  try {
+    return await axios.post(`${API_URL_COMMUNITY}/${communityId}/join`, { userId, user_id: userId })
+  } catch (err) {
+    if (err?.response?.status === 400) {
+  try { return await axios.post(`${API_URL_COMMUNITY}/${communityId}/join`, { user_id: userId }) } catch (e) { console.debug('join fallback (user_id) failed', e) }
+  try { return await axios.post(`${API_URL_COMMUNITY}/${communityId}/join`, {}) } catch (e) { console.debug('join fallback (empty body) failed', e) }
+    }
+    throw err
+  }
 }
 
 export async function leaveCommunity(communityId, userId) {
-  return axios.post(`${API_URL_COMMUNITY}/${communityId}/leave`, { userId })
+  // send both `userId` and `user_id` to be compatible with different backend payload expectations
+  try {
+    return await axios.post(`${API_URL_COMMUNITY}/${communityId}/leave`, { userId, user_id: userId })
+  } catch (err) {
+    if (err?.response?.status === 400) {
+  try { return await axios.post(`${API_URL_COMMUNITY}/${communityId}/leave`, { user_id: userId }) } catch (e) { console.debug('leave fallback (user_id) failed', e) }
+  try { return await axios.post(`${API_URL_COMMUNITY}/${communityId}/leave`, {}) } catch (e) { console.debug('leave fallback (empty body) failed', e) }
+    }
+    throw err
+  }
 }
 
 export async function getCommunityMessages(communityId) {

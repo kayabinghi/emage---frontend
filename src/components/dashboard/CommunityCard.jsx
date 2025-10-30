@@ -17,7 +17,12 @@ export default function CommunityCard({ community, onToggleJoin, onView }) {
         <div className="text-sm text-gray-500 mb-3 sm:mb-0">Topic: <span className="font-medium text-gray-700">{community.topic}</span></div>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center sm:space-x-2 w-full sm:w-auto">
           <button onClick={() => onView && onView(community)} className="w-full sm:w-auto px-3 py-2 rounded-md font-medium text-sm bg-gray-100 text-gray-800 hover:bg-gray-200">View</button>
-          <button onClick={() => onToggleJoin(community.id)} className={`w-full sm:w-auto mt-2 sm:mt-0 px-4 py-2 rounded-md font-semibold ${community.joined ? 'bg-gray-200 text-gray-700' : 'bg-emerald-600 text-white hover:bg-emerald-700'}`}>
+          <button
+            onClick={() => !community.joined && onToggleJoin(community.id)}
+            disabled={community.joined}
+            aria-pressed={community.joined}
+            className={`w-full sm:w-auto mt-2 sm:mt-0 px-4 py-2 rounded-md font-semibold ${community.joined ? 'bg-gray-200 text-gray-700 cursor-not-allowed opacity-70' : 'bg-emerald-600 text-white hover:bg-emerald-700'}`}
+          >
             {community.joined ? 'Joined' : 'Join'}
           </button>
         </div>
