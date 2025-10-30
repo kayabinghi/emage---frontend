@@ -47,7 +47,7 @@ export default function Sidebar({ activeTab, setActiveTab, userRole, mobileOpen,
       </div>
 
       <div className="p-4 m-4 bg-emerald-600 rounded-xl text-white">
-        <div className="flex items-center space-x-2"><Activity className="w-5 h-5" /><div><p className="text-xs font-semibold">Emergency:</p><p className="text-sm font-bold">+254 123 4567</p></div></div>
+        <div className="flex items-center space-x-2"><Activity className="w-5 h-5" /><div><p className="text-xs font-semibold">Emergency:</p><p className="text-sm font-bold">+254 717 377 538</p></div></div>
       </div>
       </div>
 
