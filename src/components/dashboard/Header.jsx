@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import {Menu, DownloadCloud } from 'lucide-react'
+import {Menu, DownloadCloud,Ambulance } from 'lucide-react'
 import Avatar from 'boring-avatars'
 
 export default function Header({ userName, userRole, onMenuToggle }) {
   const [deferredPrompt, setDeferredPrompt] = useState(null)
   const [canInstall, setCanInstall] = useState(false)
+  // <Ambulance />
 
   useEffect(() => {
     function onBeforeInstallPrompt(e) {
@@ -45,10 +46,15 @@ export default function Header({ userName, userRole, onMenuToggle }) {
   return (
     <div className="bg-white border-b border-gray-200 px-4 md:px-8 py-3">
       <div className="flex items-center justify-between gap-4">
+
         <div className="flex items-center gap-3">
           {/* mobile menu button */}
           <button onClick={onMenuToggle} className="md:hidden p-2 rounded-lg hover:bg-gray-100"><Menu className="w-5 h-5 text-gray-600" /></button>
         </div>
+      
+          <div className="p-3 m-3 bg-emerald-600 rounded-xl text-white">
+            <div className="flex items-center space-x-2"><Ambulance className="w-5 h-5" /><div><p className="text-xs font-semibold">Emergency:</p><p className="text-sm font-bold">+254 717 377 538</p></div></div>
+          </div>
 
         <div className="flex items-center space-x-3">
           {/* PWA install button (shows when beforeinstallprompt fires) */}
@@ -58,6 +64,10 @@ export default function Header({ userName, userRole, onMenuToggle }) {
               <span className="text-sm font-medium">Install</span>
             </button>
           )}
+
+          
+
+          {/* user info */}
 
           <div className="flex items-center space-x-3">
             <div className="w-9 h-9 md:w-10 md:h-10 rounded-full overflow-hidden">
