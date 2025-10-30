@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Heart } from 'lucide-react'
+import logo from '../../assets/logo.png'
 import { registerUser, persistAuth } from '../../services/api'
 
 export default function SignupPage({ onSignup, onSwitchToLogin }) {
@@ -48,12 +49,8 @@ export default function SignupPage({ onSignup, onSwitchToLogin }) {
         <div className="w-full max-w-md">
           <div className="mb-8">
             <div className="flex items-center space-x-3 mb-2">
-              <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center">
-                <Heart className="w-6 h-6 text-white" fill="currentColor" />
-              </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">EMAGE</h1>
-                <p className="text-xs text-gray-500">EMOTIONAL WELLNESS</p>
+                <img src={logo} alt="EMAGE" className="h-20" />
               </div>
             </div>
           </div>
@@ -106,7 +103,18 @@ export default function SignupPage({ onSignup, onSwitchToLogin }) {
         </div>
       </div>
 
-      <div className="hidden md:flex md:w-1/2 relative bg-gradient-to-br from-emerald-900 to-emerald-700"></div>
+      <div
+        className="hidden md:flex md:w-1/2 relative items-center justify-center bg-center bg-cover"
+        style={{
+          backgroundImage: "url('https://girihimalayawellness.com/assets/landing-B9293-0X.png')",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/25" />
+        <div className="relative z-10 text-white text-center px-6">
+          <h2 className="text-4xl font-bold mb-2">EMAGE</h2>
+          <p className="text-emerald-100">Emotional Awareness & Guided Expression</p>
+        </div>
+      </div>
     </div>
   )
 }
