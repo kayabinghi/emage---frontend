@@ -16,7 +16,6 @@ export default function MoodModal({ onClose, onSave }) {
     if (!selectedMood) return
     const entry = {
       ...selectedMood,
-      note,
       date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
     }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Heart } from 'lucide-react'
-import { registerUser, persistAuth } from '../services/api'
+import { registerUser, persistAuth } from '../../services/api'
 
 export default function SignupPage({ onSignup, onSwitchToLogin }) {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'patient', specialty: '' })

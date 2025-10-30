@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Heart } from 'lucide-react'
-import { loginUser, persistAuth } from '../services/api'
+import { loginUser, persistAuth } from '../../services/api'
 
 export default function LoginPage({ onLogin, onSwitchToSignup }) {
   const [email, setEmail] = useState('')

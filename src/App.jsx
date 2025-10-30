@@ -45,15 +45,15 @@ export default function App() {
   }
 
   // Rehydrate auth from storage on mount
-  useEffect(() => {
-    const { token: storedToken, user: storedUser } = getStoredAuth()
-    if (storedUser) {
-      setUser(storedUser)
-      setToken(storedToken)
-      if (storedUser.role === 'therapist' && storedUser.status === 'pending') setView('pending')
-      else setView('dashboard')
-    }
-  }, [])
+  // useEffect(() => {
+  //   const { token: storedToken, user: storedUser } = getStoredAuth()
+  //   if (storedUser) {
+  //     setUser(storedUser)
+  //     setToken(storedToken)
+  //     if (storedUser.role === 'therapist' && storedUser.status === 'pending') setView('pending')
+  //     else setView('dashboard')
+  //   }
+  // }, [])
 
   if (view === 'login') return <LoginPage onLogin={handleLogin} onSwitchToSignup={() => setView('signup')} />
   if (view === 'signup') return <SignupPage onSignup={handleSignup} onSwitchToLogin={() => setView('login')} />
