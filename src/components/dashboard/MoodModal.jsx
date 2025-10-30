@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 export default function MoodModal({ onClose, onSave }) {
   const [selectedMood, setSelectedMood] = useState(null)
-  const [note, setNote] = useState('')
 
   const moods = [
     { emoji: '😊', mood: 'Happy' },
@@ -37,12 +36,7 @@ export default function MoodModal({ onClose, onSave }) {
             </button>
           ))}
         </div>
-
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Add a note (optional)</label>
-          <textarea value={note} onChange={(e) => setNote(e.target.value)} placeholder="What's on your mind?" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500" rows="3" />
-        </div>
-
+        
         <div className="flex space-x-3">
           <button onClick={onClose} className="flex-1 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50">Cancel</button>
           <button onClick={handleSave} disabled={!selectedMood} className="flex-1 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 disabled:bg-gray-300 disabled:cursor-not-allowed">Save Mood</button>
