@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Logo from '../../assets//logo.png';
+import Logo from '../../assets/logo.png';
 
 
-const Header = () => {
+const Header = ({ onSwitchToLogin }) => {
   const [open, setOpen] = useState(false);
   const scrollToId = (e, id) => {
     e.preventDefault();
@@ -70,7 +70,7 @@ const Header = () => {
             <a href="#services" onClick={(e) => { setOpen(false); scrollToId(e, 'services'); }} className="block text-gray-700 hover:text-emerald-600 transition">Services</a>
             <a href="#contact" onClick={(e) => { setOpen(false); scrollToId(e, 'contact'); }} className="block text-gray-700 hover:text-emerald-600 transition">Contact Us</a>
             <button
-              onClick={(e) => { setOpen(false); scrollToId(e, 'contact'); }}
+              onClick={() => { setOpen(false); (onSwitchToLogin || (() => { window.location.hash = 'contact' }))(); }}
               className="w-full mt-2 bg-[#FF7A59] hover:bg-emerald-600 text-white px-6 py-2 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none"
             >
               Get Started
