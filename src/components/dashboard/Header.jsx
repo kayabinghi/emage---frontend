@@ -52,20 +52,25 @@ export default function Header({ userName, userRole, onMenuToggle }) {
           <button onClick={onMenuToggle} className="md:hidden p-2 rounded-lg hover:bg-gray-100"><Menu className="w-5 h-5 text-gray-600" /></button>
         </div>
       
-          <div className="p-3 m-3 bg-emerald-600 rounded-xl text-white">
-            <div className="flex items-center space-x-2"><Ambulance className="w-5 h-5" /><div><p className="text-xs font-semibold">Emergency:</p><p className="text-sm font-bold">+254 717 377 538</p></div></div>
-          </div>
+          
 
         <div className="flex items-center space-x-3">
           {/* PWA install button (shows when beforeinstallprompt fires) */}
           {canInstall && (
-            <button onClick={handleInstallClick} className="hidden sm:inline-flex items-center gap-2 px-3 py-2 bg-emerald-50 text-emerald-700 rounded-lg hover:bg-emerald-100">
+            <button onClick={handleInstallClick} className="hidden sm:inline-flex items-center gap-2 px-3 py-2 bg-emerald-90 text-emerald-700 rounded-lg hover:bg-emerald-100">
               <DownloadCloud className="w-4 h-4" />
               <span className="text-sm font-medium">Install</span>
             </button>
           )}
 
-          
+          <div className="p-3 m-3 bg-emerald-600 rounded-xl text-white">
+            <div className="flex items-center space-x-2"><Ambulance className="w-5 h-5" />
+            <div>
+              <p className="text-xs font-semibold">Emergency:</p>
+              <p className="text-sm font-bold">+254 717 377 538</p>
+              </div>
+            </div>
+          </div>
 
           {/* user info */}
 
