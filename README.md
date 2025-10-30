@@ -1,47 +1,136 @@
 
+# 🌿 EMAGE — People-First Wellness Platform
 
-# EMAGE — About
+A modern wellness and self-care platform built with a React frontend and Flask backend, designed to help users discover trusted wellness resources, supportive services, and curated programs for better mental and emotional wellbeing.
 
-EMAGE is a people-first wellness platform that helps individuals discover and access self-care resources, supportive services, and curated programs to improve mental and emotional wellbeing. The site presents compassionate guidance, curated services, and straightforward pricing to make taking care of yourself approachable and actionable.
+## 📑 Table of Contents
 
+- ✨ Features
 
+- ⚡ Quick Start
 
-## Our mission
+- 🔑 Authentication Setup
 
-To make trustworthy, practical self-care and supportive services accessible to everyone — with clear information, affordable options, and human-centered design that reduces friction when seeking help.
+- 📡 API Endpoints
 
-## Who it's for
+- 🌱 Usage
 
-- People looking for easy-to-follow self-care guidance
-- Individuals who want to explore paid and free services (coaching, workshops, or digital programs)
-- Caregivers and allies looking for resources to support someone else
-- Small teams and organizations seeking well-being offerings for their members
+- 🛠️ Technologies Used
 
-## What you'll find on EMAGE
+- 🔒 Privacy & Security
 
-- Clear, compassionate guidance and short, actionable self-care tips
-- A catalog of services and packages with transparent pricing
-- Testimonials and social proof to help you choose with confidence
-- An FAQ and contact area so you can ask questions or get support
-- A newsletter signup to receive regular wellbeing prompts and updates
+- 👥 Authors
 
-## How to use the site
+- 🤝 Contributing
+## ✨ Features
 
-1. Start at the homepage to read the mission and spotlighted resources.
-2. Browse the Services or Pricing sections to compare offerings and find what fits your needs.
-3. Read Testimonials to learn from others' experiences.
-4. Use the Contact or Newsletter sections to reach out or stay informed.
+🧘 Wellness & Self-Care
 
+- Curated catalog of self-care and wellness programs
 
+- Transparent pricing for paid and free offerings
 
-## Values and accessibility
+- Short, actionable guidance and wellbeing tips
 
-- Human-centered language: copy prioritizes clarity and respect
-- Accessibility-minded: semantic HTML and simple navigation for screen-reader users
-- Privacy-conscious: minimal personal data collection; contact and newsletter opt-ins are explicit
+- Testimonials and social proof for credibility
 
-## Privacy & safety
+- Newsletter for regular mental health prompts and updates
 
-EMAGE aims to respect user privacy. Any contact forms or newsletter signups collect only the information necessary to respond or deliver updates. If you plan to collect or store personal health information, ensure you add appropriate privacy and data handling policies and follow applicable regulations.
+🔐 Authentication
 
+- JWT-based authentication (access & refresh tokens)
 
+- Email/password registration & login
+
+- Protected routes and secure logout with token revocation
+
+- Personalized user dashboard for saved services and preferences
+
+🌍 Accessibility & Human-Centered Design
+
+- Clean, readable typography
+
+- Semantic HTML for screen-reader compatibility
+
+- Minimal data collection with explicit opt-ins
+
+- Inclusive, compassionate language
+## ⚡ Quick Start
+
+🔧 Backend Setup
+
+```
+export PIPENV_VENV_IN_PROJECT=1
+pipenv install
+pipenv shell
+python main.py 
+```
+💻 Frontend Setup
+
+```
+npm install
+npm run dev
+```
+## 🔑 Authentication Setup
+
+### Register
+
+Provide the following:
+
+  1. Username
+
+  2. Email
+ 
+  3. Phonenumber
+  4. Password
+  
+
+### Login
+
+- Use your email, Phonenumber and password
+## 📡 API Endpoints
+
+🔐 Authentication
+
+- ```POST / register``` -> register
+- ```POST /login``` -> login
+- ```POST /forgot``` -> forgot password
+
+🌱 Services & Resources
+- ```GET / community``` -> list_communities
+- ```POST / community``` -> create community
+
+💬 Contact & Newsletter
+- ```POST / post_message``` -> send a message
+- ```POST /message``` -> connect_users
+## 🌱 Usage
+- Register/Login to your account
+
+- Explore self-care tips and curated wellness services
+
+- Compare pricing and read testimonials
+
+- Book or save your preferred service
+
+- Subscribe to the newsletter for regular wellbeing prompts
+
+- Log out securely when done
+## 🛠️ Technologies Used
+- Backend: flask-jwt-extended. flask-cors. flask-bcrypt. flask. flask-sqlalchemy. flask-migrate. psycopg. python-dotenv. flask-softdelete 
+- Frontend: tailwindcss/vite, axios, boring-avatars, lucide-react, react, react-dom, react-router-dom, sweetalert2,tailwindcss
+- Database: PostgreSQL/Supabase
+## 🔒 Privacy & Security
+- JWT tokens (access = 60sec, refresh = 60sec)
+
+- Token revocation on logout
+
+- Password hashing with bcrypt
+
+- CORS configuration for frontend-backend communication
+
+- Minimal personal data collection — explicit user consent for contact/newsletter
+## 👥 Authors
+- [@KAYABINGHI](https://www.github.com/KAYABINGHI)
+- [@BKiptoo](https://github.com/BKiptoo)
+- [@moen-roy](https://github.com/moen-roy)
+- [@Angellucy460](https://github.com/Angellucy460)

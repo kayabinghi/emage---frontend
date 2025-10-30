@@ -1,5 +1,7 @@
 import React from 'react'
 import { Heart, Home, Calendar, Users, MessageSquare, LogOut, Activity } from 'lucide-react'
+import logo from '../../assets/logo.png'
+
 
 export default function Sidebar({ activeTab, setActiveTab, userRole, mobileOpen, onClose }) {
   const getNavItems = () => {
@@ -16,10 +18,11 @@ export default function Sidebar({ activeTab, setActiveTab, userRole, mobileOpen,
       <div className="hidden md:flex w-64 bg-white min-h-screen border-r border-gray-200 flex flex-col">
       <div className="p-6 border-b border-gray-200">
         <div className="flex items-center space-x-2">
-          <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center"><Heart className="w-6 h-6 text-white" /></div>
           <div>
-            <span className="text-xl font-bold text-gray-900">EMAGE</span>
-            <p className="text-xs text-gray-500 capitalize">{userRole}</p>
+            <div>
+              <img src={logo} alt="EMAGE" className="h-15" />
+              <p className="text-xs text-gray-500 capitalize">{userRole}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -44,7 +47,7 @@ export default function Sidebar({ activeTab, setActiveTab, userRole, mobileOpen,
       </div>
 
       <div className="p-4 m-4 bg-emerald-600 rounded-xl text-white">
-        <div className="flex items-center space-x-2"><Activity className="w-5 h-5" /><div><p className="text-xs font-semibold">Emergency:</p><p className="text-sm font-bold">+254 123 4567</p></div></div>
+        <div className="flex items-center space-x-2"><Activity className="w-5 h-5" /><div><p className="text-xs font-semibold">Emergency:</p><p className="text-sm font-bold">+254 717 377 538</p></div></div>
       </div>
       </div>
 
@@ -55,10 +58,10 @@ export default function Sidebar({ activeTab, setActiveTab, userRole, mobileOpen,
           <div className="absolute left-0 top-0 bottom-0 w-72 bg-white border-r border-gray-200 p-4 overflow-auto">
             <div className="p-4 border-b border-gray-200">
               <div className="flex items-center space-x-2">
-                <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center"><Heart className="w-6 h-6 text-white" /></div>
                 <div>
-                  <span className="text-xl font-bold text-gray-900">EMAGE</span>
+                  <img src={logo} alt="EMAGE" className="h-15" />
                   <p className="text-xs text-gray-500 capitalize">{userRole}</p>
+
                 </div>
               </div>
             </div>
@@ -81,7 +84,7 @@ export default function Sidebar({ activeTab, setActiveTab, userRole, mobileOpen,
             </div>
 
             <div className="p-4 m-4 bg-emerald-600 rounded-xl text-white">
-              <div className="flex items-center space-x-2"><Activity className="w-5 h-5" /><div><p className="text-xs font-semibold">Emergency:</p><p className="text-sm font-bold">+254 123 4567</p></div></div>
+              <div className="flex items-center space-x-2"><Activity className="w-5 h-5" /><div><p className="text-xs font-semibold">Emergency:</p><p className="text-sm font-bold">+254 717 377 538</p></div></div>
             </div>
           </div>
         </div>
