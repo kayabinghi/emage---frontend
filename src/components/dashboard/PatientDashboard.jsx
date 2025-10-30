@@ -3,13 +3,16 @@ import { Heart, Book, MessageSquare, TrendingUp } from 'lucide-react'
 import CommunityPage from './CommunityPage'
 import TherapistsPage from './TherapistsPage'
 import MoodModal from './MoodModal'
-import { getMood, getStoredAuth } from '../../services/api'
+import JournalModal from './JournalModal' // Import the JournalModal
+import { getMood, getStoredAuth, getJournals, addJournal } from '../../services/api' // Import journal APIs
 
 export default function PatientDashboard({ activeTab, onOpenJournal }) {
   const [moodEntries, setMoodEntries] = useState([])
   const [journalEntries, setJournalEntries] = useState([])
   const [showMoodModal, setShowMoodModal] = useState(false)
+  const [showJournalModal, setShowJournalModal] = useState(false) // Add journal modal state
   const [loading, setLoading] = useState(true)
+  const [journalLoading, setJournalLoading] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
   const [notification, setNotification] = useState(null)
 
@@ -18,6 +21,7 @@ export default function PatientDashboard({ activeTab, onOpenJournal }) {
     if (user) {
       setCurrentUser(user)
       loadMoodData(user.id)
+      loadJournalData() // Load journals when component mounts
     } else {
       setLoading(false)
     }
@@ -48,6 +52,19 @@ export default function PatientDashboard({ activeTab, onOpenJournal }) {
     }
   }
 
+  const loadJournalData = async () => {
+    try {
+      setJournalLoading(true)
+      const response = await getJournals()
+      setJournalEntries(response.data)
+    } catch (error) {
+      console.error('Error loading journals:', error)
+      showNotification('Failed to load journal entries', 'error')
+    } finally {
+      setJournalLoading(false)
+    }
+  }
+
   const getMoodEmoji = (mood) => {
     const emojiMap = { 'Happy': '😊', 'Calm': '😌', 'Sad': '😔', 'Anxious': '😰', 'Angry': '😤', 'Tired': '😴' }
     return emojiMap[mood] || '😐'
@@ -56,6 +73,18 @@ export default function PatientDashboard({ activeTab, onOpenJournal }) {
   const handleMoodSaved = (newEntry) => {
     setMoodEntries(prev => [newEntry, ...prev])
     showNotification(newEntry.message || 'Mood saved successfully!', 'success')
+  }
+
+  const handleJournalSaved = async (journalData) => {
+    try {
+      await addJournal(journalData)
+      setShowJournalModal(false)
+      loadJournalData() // Refresh the journal list
+      showNotification('Journal entry saved successfully!', 'success')
+    } catch (error) {
+      console.error('Error saving journal:', error)
+      showNotification('Failed to save journal entry', 'error')
+    }
   }
 
   const showNotification = (message, type = 'success') => {
@@ -69,6 +98,14 @@ export default function PatientDashboard({ activeTab, onOpenJournal }) {
       return
     }
     setShowMoodModal(true)
+  }
+
+  const handleOpenJournal = () => {
+    if (!currentUser) {
+      showNotification('Please log in to write journal entries', 'error')
+      return
+    }
+    setShowJournalModal(true)
   }
 
   if (!currentUser) {
@@ -104,6 +141,22 @@ export default function PatientDashboard({ activeTab, onOpenJournal }) {
     </div>
   )
 
+  const JournalEntry = ({ entry }) => (
+        <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+          <div className="flex items-center justify-between mb-2">
+            <h4 className="font-semibold text-gray-900">{entry.title}</h4>
+            <p className="text-sm text-gray-500">{entry.created_at}</p>
+          </div>
+          <p className="text-gray-700 whitespace-pre-wrap">{entry.content}</p>
+          {entry.is_private && (
+            <div className="mt-2">
+              <span className="inline-block bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">
+                Private
+              </span>
+            </div>
+          )}
+        </div>
+      )
   const stats = [
     { icon: Heart, value: moodEntries.length, label: 'Mood Check-ins', trend: moodEntries.length > 0 ? '+12%' : '—' },
     { icon: Book, value: journalEntries.length, label: 'Journal Entries', trend: journalEntries.length > 0 ? `+${journalEntries.length}` : '—' },
@@ -143,7 +196,7 @@ export default function PatientDashboard({ activeTab, onOpenJournal }) {
                 Log Mood
               </button>
               <button 
-                onClick={onOpenJournal} 
+                onClick={handleOpenJournal} 
                 className="px-6 py-3 bg-white text-emerald-600 rounded-lg font-semibold hover:bg-gray-50 transition"
               >
                 Write Journal
@@ -157,6 +210,17 @@ export default function PatientDashboard({ activeTab, onOpenJournal }) {
               <div className="space-y-3">
                 {moodEntries.slice(0, 3).map((entry) => (
                   <MoodEntry key={entry.id} entry={entry} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {journalEntries.length > 0 && (
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Recent Journal Entries</h3>
+              <div className="space-y-4">
+                {journalEntries.slice(0, 2).map((entry) => (
+                  <JournalEntry key={entry.id} entry={entry} />
                 ))}
               </div>
             </div>
@@ -205,27 +269,34 @@ export default function PatientDashboard({ activeTab, onOpenJournal }) {
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-xl font-bold text-gray-900">My Journal</h3>
             <button 
-              onClick={onOpenJournal} 
+              onClick={handleOpenJournal} 
               className="px-4 py-2 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition"
             >
               + New Entry
             </button>
           </div>
-          <div className="space-y-4">
-            {journalEntries.length === 0 ? (
-              <p className="text-center text-gray-500 py-8">No journal entries yet. Start writing!</p>
-            ) : (
-              journalEntries.map((entry, index) => (
-                <div key={index} className="p-4 bg-gray-50 rounded-lg">
-                  <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-semibold text-gray-900">{entry.title}</h4>
-                    <p className="text-sm text-gray-500">{entry.date}</p>
-                  </div>
-                  <p className="text-gray-700">{entry.content}</p>
-                </div>
-              ))
-            )}
-          </div>
+          
+          {journalLoading ? (
+            <div className="text-center py-8">
+              <p className="text-gray-500">Loading journal entries...</p>
+            </div>
+          ) : journalEntries.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-gray-500 mb-4">No journal entries yet. Start writing!</p>
+              <button 
+                onClick={handleOpenJournal}
+                className="text-emerald-600 hover:text-emerald-700 font-semibold"
+              >
+                Write your first entry
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {journalEntries.map((entry) => (
+                <JournalEntry key={entry.id} entry={entry} />
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -237,6 +308,14 @@ export default function PatientDashboard({ activeTab, onOpenJournal }) {
           onClose={() => setShowMoodModal(false)}
           onSave={handleMoodSaved}
           userId={currentUser.id}
+        />
+      )}
+
+      {showJournalModal && (
+        <JournalModal
+          onClose={() => setShowJournalModal(false)}
+          onSave={handleJournalSaved}
+          currentUser={currentUser}
         />
       )}
     </div>
