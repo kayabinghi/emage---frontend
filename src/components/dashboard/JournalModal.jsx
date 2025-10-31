@@ -17,7 +17,6 @@ export default function JournalModal({ onClose, onSave, currentUser }) {
         content: content,
         user_id: currentUser?.id || 1, // Use actual user ID from props
         is_private: isPrivate,
-        mood_id: null // You can add mood selection later
       }
       
       await onSave(entry)
