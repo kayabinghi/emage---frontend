@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // Base URLs
-const API_URL = 'http://127.0.0.1:5501'
+const API_URL = 'https://emage.onrender.com'
 const API_URL_AUTH = `${API_URL}/auth`
 const API_URL_MOOD = `${API_URL}/mood`
 const API_URL_JOURNALS = `${API_URL}/journals`
