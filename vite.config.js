@@ -10,8 +10,8 @@ export default defineConfig({
     VitePWA({
       manifest: {
         includeAssets: ["favicon.ico", "apple-touch-icon.png", "assets/*"],
-        name: 'Simplifying Progressive Web App (PWA) Development with Vite: A Beginners Guide',
-        short_name: 'PWA Guide',
+        name: 'EMAGE a Mental Health Companion',
+        short_name: 'EMAGE',
         start_url: '/',
         background_color: '#ffffff',
         theme_color: '#000000',
