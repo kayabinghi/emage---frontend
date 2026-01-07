@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Analytics } from "@vercel/analytics/react"
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
