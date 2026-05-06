@@ -3,17 +3,18 @@ import { useState, useEffect } from 'react';
 
 const SelfCareQuote = () => {
   const [quote, setQuote] = useState(null);
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
   
   useEffect(() => {
-    // Fixed: Added CORS proxy and removed extra space in URL
-    fetch('https://api.allorigins.win/raw?url=https://zenquotes.io/api/quotes')
-      .then(response => response.json())
-      .then(data => {
-              const randomQuote = data[Math.floor(Math.random() * data.length)];
-              setQuote(randomQuote);
-            })
-      .catch(error => console.error('Error:', error));
-  }, []);
+  fetch('https://api.allorigins.win/raw?url=http://api.forismatic.com/api/1.0/?method=getQuote%26format=json%26lang=en')
+    .then(res => res.json())
+    .then(data => {
+      setQuote(data.quoteText);
+      setAuthor(data.quoteAuthor);
+    })
+    .catch(err => console.error('Error fetching quote:', err));
+}, []);
 
   if (!quote) return (
     <section id="selfcare" className="py-20 px-6 bg-gray-900 text-white">
