@@ -2,12 +2,11 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 const SelfCareQuote = () => {
-  const [quote, setQuote] = useState(null);
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
   
   useEffect(() => {
-  fetch('https://api.allorigins.win/raw?url=http://api.forismatic.com/api/1.0/?method=getQuote%26format=json%26lang=en')
+  fetch('https://api.allorigins.win/raw?url=http://api.forismatic.com/api/1.0/%3Fmethod%3DgetQuote%26format%3Djson%26lang%3Den')
     .then(res => res.json())
     .then(data => {
       setQuote(data.quoteText);
